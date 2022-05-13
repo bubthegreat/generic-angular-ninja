@@ -1,0 +1,1049 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Django Ninja - Django REST framework with high performance, easy to learn, fast to code.">
+      
+      
+      
+      <link rel="icon" href="../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.14">
+    
+    
+      
+        <title>Routers - Django Ninja</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.3de6f41f.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cc9b2e1e.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#4cae4f">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="green" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#routers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="Django Ninja" class="md-header__button md-logo" aria-label="Django Ninja" data-md-component="logo">
+      
+  <img src="../img/docs-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Django Ninja
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Routers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/vitalik/django-ninja" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vitalik/django-ninja
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="Django Ninja" class="md-nav__button md-logo" aria-label="Django Ninja" data-md-component="logo">
+      
+  <img src="../img/docs-logo.png" alt="logo">
+
+    </a>
+    Django Ninja
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/vitalik/django-ninja" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    vitalik/django-ninja
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../motivation.html" class="md-nav__link">
+        Motivation
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Tutorial / Reference
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutorial / Reference" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorial / Reference
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
+        Tutorial - Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="path-params.html" class="md-nav__link">
+        Path parameters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="query-params.html" class="md-nav__link">
+        Query parameters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="body.html" class="md-nav__link">
+        Request Body
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="form-params.html" class="md-nav__link">
+        Form data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="file-params.html" class="md-nav__link">
+        File uploads
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="response-schema.html" class="md-nav__link">
+        Response Schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="crud.html" class="md-nav__link">
+        CRUD example
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="django-pydantic.html" class="md-nav__link">
+        Schemas from Django models
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_10" type="checkbox" id="__nav_3_10" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3_10">
+          Advanced Schema
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Advanced Schema" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_10">
+          <span class="md-nav__icon md-icon"></span>
+          Advanced Schema
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="django-pydantic-create-schema.html" class="md-nav__link">
+        Using create_schema
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="config-pydantic.html" class="md-nav__link">
+        Overriding Pydantic Config
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="authentication.html" class="md-nav__link">
+        Authentication
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Routers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="routers.html" class="md-nav__link md-nav__link--active">
+        Routers
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#router-authentication" class="md-nav__link">
+    Router authentication
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#router-tags" class="md-nav__link">
+    Router tags
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nested-routers" class="md-nav__link">
+    Nested routers
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="urls.html" class="md-nav__link">
+        Reverse Resolution of URLS
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="operation_params.html" class="md-nav__link">
+        Operations parameters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="versioning.html" class="md-nav__link">
+        Versioning
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="request-parsers.html" class="md-nav__link">
+        Request parsers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="response-renderers.html" class="md-nav__link">
+        Response renderers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="errors.html" class="md-nav__link">
+        Handling errors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="csrf.html" class="md-nav__link">
+        CSRF
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="management-commands.html" class="md-nav__link">
+        Management Commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../async-support.html" class="md-nav__link">
+        Async support
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../video.html" class="md-nav__link">
+        Video Tutorials
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_6">
+          Enhancement Proposals
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Enhancement Proposals" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          Enhancement Proposals
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proposals/index.html" class="md-nav__link">
+        Intro
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proposals/cbv.html" class="md-nav__link">
+        Class Based Operations
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proposals/v1.html" class="md-nav__link">
+        Potential v1 changes
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../help.html" class="md-nav__link">
+        Help / Get Help
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releases.html" class="md-nav__link">
+        Release Notes
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#router-authentication" class="md-nav__link">
+    Router authentication
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#router-tags" class="md-nav__link">
+    Router tags
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nested-routers" class="md-nav__link">
+    Nested routers
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+
+
+<h1 id="routers">Routers</h1>
+<p>Real world applications can almost never fit all logic into a single file. </p>
+<p><strong>Django Ninja</strong> comes with an easy way to split your API into multiple modules using Routers.</p>
+<p>Let's say you have a Django project with a structure like this:</p>
+<div class="highlight"><pre><span></span><code>├── myproject
+│   └── settings.py
+├── events/
+│   ├── __init__.py
+│   └── models.py
+├── news/
+│   ├── __init__.py
+│   └── models.py
+├── blogs/
+│   ├── __init__.py
+│   └── models.py
+└── manage.py
+</code></pre></div>
+<p>To add API's to each of the Django applications, create an <code>api.py</code> module in each app:</p>
+<div class="highlight"><pre><span></span><code>├── myproject
+│   └── settings.py
+├── events/
+│   ├── __init__.py
+<span class="hll">│   ├── api.py
+</span>│   └── models.py
+├── news/
+│   ├── __init__.py
+<span class="hll">│   ├── api.py
+</span>│   └── models.py
+├── blogs/
+│   ├── __init__.py
+<span class="hll">│   ├── api.py
+</span>│   └── models.py
+└── manage.py
+</code></pre></div>
+<p>Now let's add a few operations to <code>events/api.py</code>. The trick is that instead of using the <code>NinjaAPI</code> class, you use the <strong>Router</strong> class:</p>
+<div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">ninja</span> <span class="kn">import</span> <span class="n">Router</span>
+</span><span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Event</span>
+
+<span class="hll"><span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">()</span>
+</span>
+<span class="hll"><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+</span><span class="k">def</span> <span class="nf">list_events</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span>
+        <span class="p">{</span><span class="s2">&quot;id&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">id</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">title</span><span class="p">}</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="p">]</span>
+
+<span class="hll"><span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{event_id}</span><span class="s1">&#39;</span><span class="p">)</span>
+</span><span class="k">def</span> <span class="nf">event_details</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">event_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">event</span> <span class="o">=</span> <span class="n">Event</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">event_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;title&quot;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">title</span><span class="p">,</span> <span class="s2">&quot;details&quot;</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">details</span><span class="p">}</span>
+</code></pre></div>
+<p>Then do the same for the <code>news</code> app with <code>news/api.py</code>:</p>
+<p><div class="highlight"><pre><span></span><code><span class="hll"><span class="kn">from</span> <span class="nn">ninja</span> <span class="kn">import</span> <span class="n">Router</span>
+</span><span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">News</span>
+
+<span class="hll"><span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">()</span>
+</span>
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">list_news</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="nd">@router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;/</span><span class="si">{news_id}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">news_details</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">news_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="o">...</span>
+</code></pre></div>
+and then also <code>blogs/api.py</code>.</p>
+<p>Finally, let's group them together.
+In your top level project folder (next to <code>urls.py</code>), create another <code>api.py</code> file with the main <code>NinjaAPI</code> instance:</p>
+<div class="highlight"><pre><span></span><code>├── myproject
+<span class="hll">│   ├── api.py
+</span>│   └── settings.py
+├── events/
+│   ...
+├── news/
+│   ...
+├── blogs/
+│   ...
+</code></pre></div>
+<p>It should look like this:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ninja</span> <span class="kn">import</span> <span class="n">NinjaAPI</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">NinjaAPI</span><span class="p">()</span>
+</code></pre></div>
+<p>Now we import all the routers from the various apps, and include them into the main API instance:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ninja</span> <span class="kn">import</span> <span class="n">NinjaAPI</span>
+<span class="hll"><span class="kn">from</span> <span class="nn">events.api</span> <span class="kn">import</span> <span class="n">router</span> <span class="k">as</span> <span class="n">events_router</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">news.api</span> <span class="kn">import</span> <span class="n">router</span> <span class="k">as</span> <span class="n">news_router</span>
+</span><span class="hll"><span class="kn">from</span> <span class="nn">blogs.api</span> <span class="kn">import</span> <span class="n">router</span> <span class="k">as</span> <span class="n">blogs_router</span>
+</span>
+<span class="n">api</span> <span class="o">=</span> <span class="n">NinjaAPI</span><span class="p">()</span>
+
+<span class="hll"><span class="n">api</span><span class="o">.</span><span class="n">add_router</span><span class="p">(</span><span class="s2">&quot;/events/&quot;</span><span class="p">,</span> <span class="n">events_router</span><span class="p">)</span>
+</span><span class="hll"><span class="n">api</span><span class="o">.</span><span class="n">add_router</span><span class="p">(</span><span class="s2">&quot;/news/&quot;</span><span class="p">,</span> <span class="n">news_router</span><span class="p">)</span>
+</span><span class="hll"><span class="n">api</span><span class="o">.</span><span class="n">add_router</span><span class="p">(</span><span class="s2">&quot;/blogs/&quot;</span><span class="p">,</span> <span class="n">blogs_router</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Now, include <code>api</code> to your urls as usual and open your browser at <code>/api/docs</code>, and you should see all your routers combined into a single API:</p>
+<p><img alt="Swagger UI Simple Routers" src="../img/simple-routers-swagger.png" /></p>
+<h2 id="router-authentication">Router authentication</h2>
+<p>Use <code>auth</code> argument to apply authenticator to all operations declared by router:</p>
+<div class="highlight"><pre><span></span><code><span class="n">api</span><span class="o">.</span><span class="n">add_router</span><span class="p">(</span><span class="s2">&quot;/events/&quot;</span><span class="p">,</span> <span class="n">events_router</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">BasicAuth</span><span class="p">())</span>
+</code></pre></div>
+<p>or using router constructor
+<div class="highlight"><pre><span></span><code><span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">(</span><span class="n">auth</span><span class="o">=</span><span class="n">BasicAuth</span><span class="p">())</span>
+</code></pre></div></p>
+<h2 id="router-tags">Router tags</h2>
+<p>You can use <code>tags</code> argument to apply tags to all operations declared by router:</p>
+<div class="highlight"><pre><span></span><code><span class="n">api</span><span class="o">.</span><span class="n">add_router</span><span class="p">(</span><span class="s2">&quot;/events/&quot;</span><span class="p">,</span> <span class="n">events_router</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">])</span>
+</code></pre></div>
+<p>or using router constructor
+<div class="highlight"><pre><span></span><code><span class="n">router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;events&quot;</span><span class="p">])</span>
+</code></pre></div></p>
+<h2 id="nested-routers">Nested routers</h2>
+<p>There are also times when you need to split your logic up even more.
+<strong>Django Ninja</strong> makes it possible to include a router into another router as many times as you like, and finally include the top level router into the main api instance.</p>
+<p>Basically, what that means is that you have <code>add_router</code> both on the <code>api</code> instance and on the <code>router</code> instance:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">ninja</span> <span class="kn">import</span> <span class="n">NinjaAPI</span><span class="p">,</span> <span class="n">Router</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">NinjaAPI</span><span class="p">()</span>
+
+<span class="hll"><span class="n">first_router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">()</span>
+</span><span class="hll"><span class="n">second_router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">()</span>
+</span><span class="hll"><span class="n">third_router</span> <span class="o">=</span> <span class="n">Router</span><span class="p">()</span>
+</span>
+
+<span class="nd">@api</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/add&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">}</span>
+
+
+<span class="nd">@first_router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/add&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">}</span>
+
+
+<span class="nd">@second_router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/add&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">}</span>
+
+
+<span class="nd">@third_router</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/add&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;result&quot;</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">}</span>
+
+
+<span class="hll"><span class="n">second_router</span><span class="o">.</span><span class="n">add_router</span><span class="p">(</span><span class="s2">&quot;l3&quot;</span><span class="p">,</span> <span class="n">third_router</span><span class="p">)</span>
+</span><span class="hll"><span class="n">first_router</span><span class="o">.</span><span class="n">add_router</span><span class="p">(</span><span class="s2">&quot;l2&quot;</span><span class="p">,</span> <span class="n">second_router</span><span class="p">)</span>
+</span><span class="hll"><span class="n">api</span><span class="o">.</span><span class="n">add_router</span><span class="p">(</span><span class="s2">&quot;l1&quot;</span><span class="p">,</span> <span class="n">first_router</span><span class="p">)</span>
+</span>
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;admin/&quot;</span><span class="p">,</span> <span class="n">admin</span><span class="o">.</span><span class="n">site</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s2">&quot;api/&quot;</span><span class="p">,</span> <span class="n">api</span><span class="o">.</span><span class="n">urls</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div>
+<p>Now you have the following endpoints:</p>
+<div class="highlight"><pre><span></span><code>/api/add
+/api/l1/add
+/api/l1/l2/add
+/api/l1/l2/l3/add
+</code></pre></div>
+<p>Great! Now go have a look at the automatically generated docs:</p>
+<p><img alt="Swagger UI Nested Routers" src="../img/nested-routers-swagger.png" /></p>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="authentication.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Authentication" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Authentication
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="urls.html" class="md-footer__link md-footer__link--next" aria-label="Next: Reverse Resolution of URLS" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Reverse Resolution of URLS
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c2e1ee47.min.js"></script>
+      
+    
+  </body>
+</html>
