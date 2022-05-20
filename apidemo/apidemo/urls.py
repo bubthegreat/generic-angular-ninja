@@ -14,55 +14,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin  # type: ignore
-from django.shortcuts import get_object_or_404  # type: ignore
 from django.urls import path  # type: ignore
 from ninja import NinjaAPI
-from .types import EmployeePost, DepartmentPost, EmployeeGet, DepartmentGet
-from .models import Employee, Department
-from typing import List
+from .models import Employee, Department, KeyArea, Competency, FunctionalArea, Level, LevelDescription
 from django.conf.urls.static import static  # type: ignore
 from django.conf import settings  # type: ignore
-from .views import HomePageView
 from django.views.generic import TemplateView  # type: ignore
-
+from apidemo.crud.utils import add_model_crud_route
 
 api = NinjaAPI()
 
-@api.post("/employees")
-def create_employee(request, payload: EmployeePost):
-    """Create a new employee based on input."""
-    employee = Employee.objects.create(**payload.dict())
-    return {"id": employee.id}
-
-@api.get("/employees/{employee_id}", response=EmployeeGet)
-def get_employee(request, employee_id: int):
-    """Return an object for the employee ID specified."""
-    employee = get_object_or_404(Employee, id=employee_id)
-    return employee
-
-@api.get("/employees", response=List[EmployeeGet])
-def list_employees(request):
-    """Return a list of all employees."""
-    qs = Employee.objects.all()
-    return qs
-
-@api.post("/departments")
-def create_department(request, payload: DepartmentPost):
-    """Create a new department based on input."""
-    department = Department.objects.create(**payload.dict())
-    return {"id": department.id}
-
-@api.get("/departments/{department_id}", response=DepartmentGet)
-def get_department(request, department_id: int):
-    """Return an object for the department ID specified."""
-    department = get_object_or_404(Department, id=department_id)
-    return department
-
-@api.get("/departments", response=List[DepartmentGet])
-def list_departments(request):
-    """Return a list of all departments."""
-    qs = Department.objects.all()
-    return qs
+add_model_crud_route(api, 'employees', Employee)
+add_model_crud_route(api, 'departments', Department)
+add_model_crud_route(api, 'keyarea', KeyArea)
+add_model_crud_route(api, 'competency', Competency)
+add_model_crud_route(api, 'functonalarea', FunctionalArea)
+add_model_crud_route(api, 'level', Level)
+add_model_crud_route(api, 'leveldescription', LevelDescription)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
