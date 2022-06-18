@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: skill-matrix-api
+spec:
+    selector:
+        name: skill-matrix-api
+    clusterIP: None
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: skill-matrix-api
+spec:
+    selector:
+        matchLabels:
+            app: skill-matrix-api
+    replicas: 1
+    template:
+        metadata:
+            labels:
+                name: skill-matrix-api
+                app: skill-matrix-api
+        spec:
+            containers:
+                - name: skill-matrix-api
+                  image: skill-matrix-api-image
+                  ports:
+                      - containerPort: 8000
