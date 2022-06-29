@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: skill-matrix-ui
+spec:
+    selector:
+        name: skill-matrix-ui
+    ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: skill-matrix-ui
+spec:
+    selector:
+        matchLabels:
+            app: skill-matrix-ui
+    replicas: 3
+    template:
+        metadata:
+            labels:
+                name: skill-matrix-ui
+                app: skill-matrix-ui
+        spec:
+            containers:
+                - name: skill-matrix-ui
+                  image: skill-matrix-ui-image
+                  ports:
+                      - containerPort: 8080

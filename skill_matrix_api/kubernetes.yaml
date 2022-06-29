@@ -5,7 +5,11 @@ metadata:
 spec:
     selector:
         name: skill-matrix-api
-    clusterIP: None
+    ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+    
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -15,7 +19,7 @@ spec:
     selector:
         matchLabels:
             app: skill-matrix-api
-    replicas: 1
+    replicas: 3
     template:
         metadata:
             labels:
