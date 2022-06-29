@@ -35,5 +35,5 @@ add_model_crud_route(api, 'leveldescription', LevelDescription)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", api.urls),
-    path('', TemplateView.as_view(template_name="index.html")),
+    # path('', TemplateView.as_view(template_name="index.html")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

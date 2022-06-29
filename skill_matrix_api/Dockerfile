@@ -15,6 +15,7 @@ RUN pip install -r requirements.txt
 
 WORKDIR /usr/src/skill_matrix_api
 RUN python /usr/src/skill_matrix_api/manage.py collectstatic --no-input
+RUN mkdir -p /mnt/data
 
 EXPOSE 8000
 

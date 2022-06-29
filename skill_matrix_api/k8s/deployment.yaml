@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skill-matrix-api
+spec:
+  selector:
+    matchLabels:
+      app: skill-matrix-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: skill-matrix-api
+        app: skill-matrix-api
+    spec:
+      volumes:
+        - name: api-sqlite-volume
+          persistentVolumeClaim:
+            claimName: sqlite-volume-claim
+      volumeMounts:
+        - mountPath: /mnt/data
+          name: api-sqlite-volume
+      containers:
+        - name: skill-matrix-api
+          image: skill-matrix-api-image
+          ports:
+            - containerPort: 8000

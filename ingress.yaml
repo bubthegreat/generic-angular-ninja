@@ -9,21 +9,21 @@ spec:
   - host: app.localhost
     http:
       paths:
-      - path: /ui
+      - path: /ui/
         pathType: Prefix
         backend:
           service:
             name: skill-matrix-ui
             port:
               number: 8080
-      - path: /api
+      - path: /api/
         pathType: Prefix
         backend:
           service:
             name: skill-matrix-api
             port:
               number: 8000
-      - path: /admin
+      - path: /admin/
         pathType: Prefix
         backend:
           service:

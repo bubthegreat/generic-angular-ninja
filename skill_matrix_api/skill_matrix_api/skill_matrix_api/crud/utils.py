@@ -17,13 +17,6 @@ def _get_model_router(model, name):
         instance = await sync_to_async(model.objects.create)(**payload.dict())
         return ModelGet.from_orm(instance)
 
-    @router.post(f"/{name}2")
-    async def create_instance2(request, payload: ModelPost):
-        """Create a new instance based on input."""
-        orm_instnace = await sync_to_async(payload.orm.apply)(ModelPost())
-        orm_instnace.save()
-        return ModelGet.from_orm(orm_instnace)
-
     @router.get(f"/{name}/" + "{model_id}", response=ModelGet)
     async def get_instance(request, model_id: int):
         """Return an instance for the ID specified."""

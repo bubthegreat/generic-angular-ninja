@@ -10,18 +10,51 @@ load('ext://uibutton', 'cmd_button', 'location', 'text_input')
 
 # TODO: Add URL for the minikube dashboard since it will be how people can see shit in production.
 
-docker_build('skill-matrix-api-image', 'skill_matrix_api/', live_update=[
-    sync('./skill_matrix_api/skill_matrix', '/usr/src/skill_matrix/skill_matrix'),
-])
+docker_build('skill-matrix-api-image', 'skill_matrix_api/', 
+    live_update=[
+        sync('./skill_matrix_api/skill_matrix/', '/usr/src/skill_matrix/skill_matrix/'),
+        run(
+            'pip install -r /usr/src/requirements.txt',
+            trigger=['./skill_matrix_api/requirements.txt']
+        )
+    ]
+)
 docker_build('skill-matrix-ui-image', 'skill_matrix_ui/')
 docker_prune_settings( disable = False , max_age_mins = 360 , num_builds = 0 , interval_hrs = 1 , keep_recent = 2 ) 
+docker_build('util-ubuntu-image', 'ubuntu/')
 
-k8s_yaml('skill_matrix_api/kubernetes.yaml')
-k8s_yaml('skill_matrix_ui/kubernetes.yaml')
+k8s_yaml([
+    'skill_matrix_api/k8s/deployment.yaml',
+    'skill_matrix_api/k8s/service.yaml',
+    'skill_matrix_api/k8s/volume-claim.yaml',
+    'skill_matrix_api/k8s/volume.yaml',
+])
+k8s_yaml([
+    'skill_matrix_ui/k8s/deployment.yaml',
+    'skill_matrix_ui/k8s/service.yaml',
+])
 k8s_yaml('ingress.yaml')
+k8s_yaml('storage-class.yaml')
+k8s_yaml('ubuntu/deployment.yaml')
+k8s_yaml([
+    'postgres-server/secrets.yaml',
+    'postgres-server/deployment.yaml',
+    'postgres-server/service.yaml',
+    'postgres-server/volume-claim.yaml',
+    'postgres-server/volume.yaml',
+])
+k8s_yaml([
+    'redis-server/secrets.yaml',
+    'redis-server/deployment.yaml',
+    'redis-server/service.yaml',
+    'redis-server/volume-claim.yaml',
+    'redis-server/volume.yaml',
+])
 
 k8s_resource('skill-matrix-ui', port_forwards=8080, labels=['services'])
 k8s_resource('skill-matrix-api', port_forwards=8000, labels=['services'])
+k8s_resource('postgres', port_forwards=5432, labels=['databases'])
+k8s_resource('redis', port_forwards=6379, labels=['databases'])
 
 
 # Kubernetes resources, all of these should be non-blocking so this seems ideal - maybe some of these shoudl be buttons?
