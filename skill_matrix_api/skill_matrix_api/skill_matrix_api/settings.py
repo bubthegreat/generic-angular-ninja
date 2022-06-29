@@ -78,22 +78,22 @@ WSGI_APPLICATION = 'skill_matrix_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/mnt/data/db.sqlite3',
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'skills_database',
-#         'USER': 'admin',
-#         'PASSWORD': '1f2d1e2e67df',
-#         'HOST': 'postgres',
-#         'PORT': '5432',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': '/mnt/data/db.sqlite3',
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'skills_database',
+        'USER': 'postgres',
+        'PASSWORD': '1f2d1e2e67df',
+        'HOST': 'postgres',
+        'PORT': '5432',
+    }
+}
 
 
 # Password validation

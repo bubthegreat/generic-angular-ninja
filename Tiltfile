@@ -8,8 +8,6 @@ load('ext://uibutton', 'cmd_button', 'location', 'text_input')
 # Get ingress logs: 
 # kubectl logs -n ingress-nginx `kubectl get pods -n ingress-nginx | grep controller | awk '{print $1}'`
 
-# TODO: Add URL for the minikube dashboard since it will be how people can see shit in production.
-
 docker_build('skill-matrix-api-image', 'skill_matrix_api/', 
     live_update=[
         sync('./skill_matrix_api/skill_matrix/', '/usr/src/skill_matrix/skill_matrix/'),
