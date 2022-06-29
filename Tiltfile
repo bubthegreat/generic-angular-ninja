@@ -25,8 +25,8 @@ k8s_resource('skill-matrix-api', port_forwards=8000, labels=['services'])
 
 
 # Kubernetes resources, all of these should be non-blocking so this seems ideal - maybe some of these shoudl be buttons?
-local_resource('tunnel', cmd="minikube tunnel", labels=['kubernetes'], allow_parallel=True)
-local_resource('ingress-logs', cmd="kubectl logs --follow -n ingress-nginx `kubectl get pods -n ingress-nginx | grep controller | awk '{print $1}'`", labels=['kubernetes'], allow_parallel=True)
+local_resource('tunnel', cmd="minikube tunnel", labels=['kubernetes'], allow_parallel=True, auto_init=False)
+local_resource('ingress-logs', cmd="kubectl logs --follow -n ingress-nginx `kubectl get pods -n ingress-nginx | grep controller | awk '{print $1}'`", labels=['kubernetes'], allow_parallel=True, auto_init=False)
 local_resource('deployments', cmd="kubectl get deployments", resource_deps=['skill-matrix-ui', 'skill-matrix-api'], labels=['kubernetes'], allow_parallel=True)
 local_resource('services', cmd="kubectl get services", resource_deps=['skill-matrix-ui', 'skill-matrix-api'], labels=['kubernetes'], allow_parallel=True)
 local_resource('k8s-yaml', cmd="kubectl get all -o yaml", resource_deps=['skill-matrix-ui', 'skill-matrix-api'], labels=['kubernetes'], allow_parallel=True)

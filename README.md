@@ -1,10 +1,16 @@
 # Skill Matrix
 
-Skill matrix is a website for building out skill matrices and doing self and team assessments based on them.
+Skill matrix is a website for building out skill matrices and doing self and team assessments based on them.  Really though right now this is some bare bones implementation stuff.
 
-## Documentation
+Items in the to do list: 
 
-Included documentation for django and django-ninja for offline use
+* Add a persistent database deployment with postgres and make it available
+* Add a persistent redis deployment
+* Add a persistent rabbitmq deployment
+* Add a spark cluster option
+* Add some pulsar love https://pulsar.apache.org/docs/next/helm-install
+* 
+
 
 ## Getting Started
 
@@ -39,5 +45,19 @@ curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/instal
 ```
 tilt up
 ```
+## Default locations
 
-[Admin UI](./files/admin_ui.png, "The Admin UI")
+### Admin UI
+Once you've got things started up, you should be able to reach the admin UI at http://app.localhost/admin/
+
+![Admin UI](img/admin_ui.png?raw=true)
+
+### Angular UI
+Once you've got things started up, you should be able to reach the admin UI at http://app.localhost/ui/
+
+![Admin UI](img/angular_ui.png?raw=true)
+
+### Django Ninja Swagger Docs
+Once you've got things started up, you should be able to reach the admin UI at http://app.localhost/api/docs/
+
+![Admin UI](img/api_docs.png?raw=true)
