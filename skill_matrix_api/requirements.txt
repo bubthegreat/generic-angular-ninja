@@ -1,6 +1,5 @@
 django-ninja
 ipdb
-black
+black==22.3.0
 pytest
-psycopg2
-
+psycopg2-binary

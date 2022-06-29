@@ -16,7 +16,15 @@ Including another URLconf
 from django.contrib import admin  # type: ignore
 from django.urls import path  # type: ignore
 from ninja import NinjaAPI
-from .models import Employee, Department, KeyArea, Competency, FunctionalArea, Level, LevelDescription
+from .models import (
+    Employee,
+    Department,
+    KeyArea,
+    Competency,
+    FunctionalArea,
+    Level,
+    LevelDescription,
+)
 from django.conf.urls.static import static  # type: ignore
 from django.conf import settings  # type: ignore
 from django.views.generic import TemplateView  # type: ignore
@@ -24,13 +32,13 @@ from skill_matrix_api.crud.utils import add_model_crud_route
 
 api = NinjaAPI()
 
-add_model_crud_route(api, 'employees', Employee)
-add_model_crud_route(api, 'departments', Department)
-add_model_crud_route(api, 'keyarea', KeyArea)
-add_model_crud_route(api, 'competency', Competency)
-add_model_crud_route(api, 'functonalarea', FunctionalArea)
-add_model_crud_route(api, 'level', Level)
-add_model_crud_route(api, 'leveldescription', LevelDescription)
+add_model_crud_route(api, "employees", Employee)
+add_model_crud_route(api, "departments", Department)
+add_model_crud_route(api, "keyarea", KeyArea)
+add_model_crud_route(api, "competency", Competency)
+add_model_crud_route(api, "functonalarea", FunctionalArea)
+add_model_crud_route(api, "level", Level)
+add_model_crud_route(api, "leveldescription", LevelDescription)
 
 urlpatterns = [
     path("admin/", admin.site.urls),

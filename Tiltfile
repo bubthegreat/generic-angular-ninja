@@ -71,3 +71,10 @@ cmd_button(
     location=location.NAV,
     icon_name='install_desktop'
 )
+cmd_button(
+    name='nav-black',
+    argv=['black', 'skill_matrix_api/skill_matrix_api/'],
+    text='Python Black',
+    location=location.NAV,
+    icon_name='install_desktop'
+)

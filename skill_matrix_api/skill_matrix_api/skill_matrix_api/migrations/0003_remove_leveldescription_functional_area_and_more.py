@@ -7,26 +7,34 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('skill_matrix_api', '0002_competency_functionalarea_keyarea_level_and_more'),
+        ("skill_matrix_api", "0002_competency_functionalarea_keyarea_level_and_more"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='leveldescription',
-            name='functional_area',
+            model_name="leveldescription",
+            name="functional_area",
         ),
         migrations.RemoveField(
-            model_name='leveldescription',
-            name='key_area',
+            model_name="leveldescription",
+            name="key_area",
         ),
         migrations.AddField(
-            model_name='competency',
-            name='functional_area',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='skill_matrix_api.functionalarea'),
+            model_name="competency",
+            name="functional_area",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="skill_matrix_api.functionalarea",
+            ),
         ),
         migrations.AddField(
-            model_name='functionalarea',
-            name='key_area',
-            field=models.ForeignKey(default=None, on_delete=django.db.models.deletion.CASCADE, to='skill_matrix_api.keyarea'),
+            model_name="functionalarea",
+            name="key_area",
+            field=models.ForeignKey(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to="skill_matrix_api.keyarea",
+            ),
         ),
     ]

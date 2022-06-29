@@ -9,9 +9,11 @@ RUN apk add ca-certificates \
     jpeg-dev zlib-dev \
     && pip install django-ninja
 
+
 WORKDIR /usr/src
-COPY . .
+ADD requirements.txt .
 RUN pip install -r requirements.txt
+COPY . .
 
 WORKDIR /usr/src/skill_matrix_api
 RUN python /usr/src/skill_matrix_api/manage.py collectstatic --no-input

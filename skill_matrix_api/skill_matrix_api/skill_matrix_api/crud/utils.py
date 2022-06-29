@@ -4,12 +4,13 @@ from typing import List, Any
 from ninja.orm import create_schema
 from ninja import Router
 
+
 def _get_model_router(model, name):
 
     router = Router(tags=[name])
 
-    ModelPost = create_schema(model = model, name = f"{name.title()}Post", exclude=['id'])
-    ModelGet = create_schema(model = model, name = f"{name.title()}Get")
+    ModelPost = create_schema(model=model, name=f"{name.title()}Post", exclude=["id"])
+    ModelGet = create_schema(model=model, name=f"{name.title()}Get")
 
     @router.post(f"/{name}")
     async def create_instance(request, payload: ModelPost):
@@ -59,4 +60,4 @@ def _get_model_router(model, name):
 
 def add_model_crud_route(api, name, model):
     """Add a deafult crud router with url `name` for model `model` to the api."""
-    api.add_router(f'/{name}/', _get_model_router(model, name))
+    api.add_router(f"/{name}/", _get_model_router(model, name))
