@@ -14,6 +14,13 @@ Items in the to do list:
 
 ## Getting Started
 
+If you're on WSL2 you can run:
+```
+./setup.sh
+```
+
+![Admin UI](img/install.sh.png?raw=true)
+
 ### Install MiniKube
 
 https://minikube.sigs.k8s.io/docs/start/
