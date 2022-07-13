@@ -17,4 +17,4 @@ spec:
                 - name: skill-matrix-ui
                   image: skill-matrix-ui-image
                   ports:
-                      - containerPort: 8080
+                      - containerPort: 4200

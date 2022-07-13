@@ -12,11 +12,17 @@ def _get_model_router(model, name):
     ModelPost = create_schema(model=model, name=f"{name.title()}Post", exclude=["id"])
     ModelGet = create_schema(model=model, name=f"{name.title()}Get")
 
+    def get_create_function():
+        async def create_instance(request, payload: ModelPost):
+            """Create a new instance based on input."""
+            instance = await sync_to_async(model.objects.create)(**payload.dict())
+            return ModelGet.from_orm(instance)
+        res = create_instance
+        res.__name__ = f"create_{name}_instance"
+        return res
+
     @router.post(f"/{name}")
-    async def create_instance(request, payload: ModelPost):
-        """Create a new instance based on input."""
-        instance = await sync_to_async(model.objects.create)(**payload.dict())
-        return ModelGet.from_orm(instance)
+    get_create_function()
 
     @router.get(f"/{name}/" + "{model_id}", response=ModelGet)
     async def get_instance(request, model_id: int):

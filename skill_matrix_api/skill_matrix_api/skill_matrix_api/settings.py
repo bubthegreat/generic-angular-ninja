@@ -87,7 +87,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": "skills_database",
-        "USER": "postgres",
+        "USER": "postgres", # TODO: Pull this from configmap and os.environ
         "PASSWORD": "1f2d1e2e67df",
         "HOST": "postgres",
         "PORT": "5432",

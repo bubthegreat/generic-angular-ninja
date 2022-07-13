@@ -17,7 +17,17 @@ docker_build('skill-matrix-api-image', 'skill_matrix_api/',
         )
     ]
 )
-docker_build('skill-matrix-ui-image', 'skill_matrix_ui/')
+# docker_build('skill-matrix-ui-image', 'skill_matrix_ui/')
+docker_build('skill-matrix-ui-image', 
+    context='skill_matrix_ui/skill_matrix_app',
+    dockerfile='skill_matrix_ui/skill_matrix_app/Dockerfile-dev',
+    live_update=[
+        # Sync files from host to container
+        sync('skill_matrix_ui/skill_matrix_app/src', '/usr/src/app/src/'),
+        sync('skill_matrix_ui/skill_matrix_app/package.json', '/usr/src/app/'),
+        sync('skill_matrix_ui/skill_matrix_app/package-lock.json', '/usr/src/app/'),
+    ]
+)
 docker_prune_settings( disable = False , max_age_mins = 360 , num_builds = 0 , interval_hrs = 1 , keep_recent = 2 ) 
 docker_build('util-ubuntu-image', 'ubuntu/')
 
@@ -49,7 +59,8 @@ k8s_yaml([
     'redis-server/volume.yaml',
 ])
 
-k8s_resource('skill-matrix-ui', port_forwards=8080, labels=['services'])
+#k8s_resource('skill-matrix-ui', port_forwards=8080, labels=['services'])
+k8s_resource('skill-matrix-ui', port_forwards=4200, labels=['services'])
 k8s_resource('skill-matrix-api', port_forwards=8000, labels=['services'])
 k8s_resource('postgres', port_forwards=5432, labels=['databases'])
 k8s_resource('redis', port_forwards=6379, labels=['databases'])
