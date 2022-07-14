@@ -29,8 +29,42 @@ from django.conf.urls.static import static  # type: ignore
 from django.conf import settings  # type: ignore
 from django.views.generic import TemplateView  # type: ignore
 from skill_matrix_api.crud.utils import add_model_crud_route
+from ninja.security import HttpBasicAuth
+from django.contrib.auth.models import User
+from ninja import Schema
+
+# TODO: Remove this default admin/admin hack.
+admins = User.objects.filter(is_staff=True)
+if not admins:
+    User(username='admin', password='admin', is_staff=True).save()
+
+import time
+UPTIME_START = time.time()
 
 api = NinjaAPI()
+
+# HACKY STATUS< DO THIS RIGHT
+
+from django.db import connections
+from django.db.utils import OperationalError
+
+
+class StatusSchema(Schema):
+    uptime: int
+    mysql_connected: bool
+
+@api.get('/status', response=StatusSchema)
+def return_status(request):
+    total_uptime = time.time() - UPTIME_START
+    db_conn = connections['default']
+    try:
+        c = db_conn.cursor()
+    except OperationalError:
+        mysql_connected = False
+    else:
+        mysql_connected = True
+
+    return {'uptime': total_uptime, 'mysql_connected': mysql_connected}
 
 add_model_crud_route(api, "employees", Employee)
 add_model_crud_route(api, "departments", Department)
@@ -43,5 +77,6 @@ add_model_crud_route(api, "leveldescription", LevelDescription)
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("api/", api.urls),
-    # path('', TemplateView.as_view(template_name="index.html")),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+

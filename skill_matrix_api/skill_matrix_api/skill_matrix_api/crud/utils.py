@@ -6,6 +6,8 @@ from django.db.models.fields.related_descriptors import ForeignKeyDeferredAttrib
 from typing import List, Any, Dict
 from ninja.orm import create_schema
 from ninja import Router
+from ninja.pagination import paginate, PageNumberPagination
+from ninja.security import django_auth
 
 import logging
 
@@ -25,6 +27,7 @@ def _parse_fk_payload_keys(model: Model, payload_dict: Dict[str, Any]) -> Dict[s
 
 
 def _get_model_router(model: Model, name: str) -> Router:
+    LOGGER.debug("Doing the logging debug thing")
 
     router = Router()
 
@@ -35,7 +38,9 @@ def _get_model_router(model: Model, name: str) -> Router:
     async def create_instance(request, payload: ModelPost):
         """Create a new instance based on input."""
         parsed_dict = _parse_fk_payload_keys(model, payload.dict())
+        LOGGER.debug("Creating %s instance from parsed_dict %s", model.__name__, parsed_dict)
         instance = await sync_to_async(model.objects.create)(**parsed_dict)
+        LOGGER.debug("Created %s instance %s", model.__name__, instance)
         return ModelGet.from_orm(instance)
 
     @router.get(f"/" + "{model_id}", response=ModelGet, operation_id=f"get_instance_{name}", summary=f"Return an {model.__name__} instance for the given id.")
@@ -44,11 +49,12 @@ def _get_model_router(model: Model, name: str) -> Router:
         instance = await sync_to_async(get_object_or_404)(model, id=model_id)
         return ModelGet.from_orm(instance)
 
-    @router.get(f"/{name}", response=List[ModelGet], operation_id=f"list_instances_{name}", summary=f"Return a list of all {model.__name__} instances.")
-    async def list_instances(request):
+    # TODO: Figure out how to get async pagination working because this is meh.
+    @router.get(f"/", response=List[ModelGet], operation_id=f"list_instances_{name}", summary=f"Return a list of all {model.__name__} instances.")
+    @paginate(PageNumberPagination)
+    def list_instances(request):
         """Return a list of all model instances."""
-        qs = await sync_to_async(list)(model.objects.all())
-        return qs
+        return model.objects.all()
 
     @router.put(f"/" + "{model_id}", operation_id=f"update_instance_{name}", summary=f"Update the {model.__name__} instance with the payload for the given id.")
     async def update_instance(request, model_id: int, payload: ModelPost):
@@ -77,12 +83,12 @@ def _get_model_router(model: Model, name: str) -> Router:
         await sync_to_async(instance.delete)()
         return {"success": True}
 
-    LOGGER.info("Retriefed router for %s", name)
+    LOGGER.debug("Confingured router for %s", name)
 
     return router
 
 
-def add_model_crud_route(api, name, model):
+def add_model_crud_route(api, name, model, auth=None):
     """Add a deafult crud router with url `name` for model `model` to the api."""
-    LOGGER.info("Adding model CRUD route for model %s under name %s", model, name)
-    api.add_router(f"/{name}/", _get_model_router(model, name), tags=[name])
+    LOGGER.info("Adding model CRUD route for model %s under name %s", model.__name__, name)
+    api.add_router(f"/{name}/", _get_model_router(model, name), tags=[name], auth=auth)

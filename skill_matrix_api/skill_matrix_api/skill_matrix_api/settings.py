@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 
@@ -29,6 +29,84 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 LOGIN_REDIRECT_URL = "/login"
 
+LOG_LEVEL = os.environ.get("SKILL_MATRIX_API_LOG_LEVEL", "DEBUG")
+
+LOGGING_BASE = {
+    "version": 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'filter_info_level': {
+            '()': 'skill_matrix_api.log_middleware.FilterLevels',
+            'filter_levels' : [
+                "INFO",
+                "WARNING",
+            ]
+        },
+        'filter_debug_level': {
+            '()': 'skill_matrix_api.log_middleware.FilterLevels',
+            'filter_levels' : [
+                "DEBUG"
+            ]
+        },
+        'filter_error_level': {
+            '()': 'skill_matrix_api.log_middleware.FilterLevels',
+            'filter_levels' : [
+                "ERROR"
+            ]
+        }
+    },
+    'formatters': {
+        'info-formatter': {
+            'format': '%(asctime)s %(levelname)s - %(name)s - %(message)s',
+            'datefmt': "%m/%d/%Y %I:%M:%S %p",
+        },
+        'debug-formatter': {
+            'format': '%(asctime)s %(levelname)s - %(name)s.%(funcName)s:%(lineno)d - %(message)s',
+            'datefmt': "%m/%d/%Y %I:%M:%S %p",
+        },
+        'error-formatter': {
+            'format': '%(asctime)s %(levelname)s - %(name)s.%(funcName)s:%(lineno)d - %(message)s',
+            'datefmt': "%m/%d/%Y %I:%M:%S %p",
+        },
+    },
+    "handlers": {
+        "console-info": {
+            "formatter": "info-formatter",
+            "class": "logging.StreamHandler",
+            "filters": ["filter_info_level"],
+        },
+        "console-debug": {
+            "formatter": "debug-formatter",
+            "class": "logging.StreamHandler",
+            "filters": ["filter_debug_level"],
+        },
+        "console-error": {
+            "formatter": "error-formatter",
+            "class": "logging.StreamHandler",
+            "filters": ["filter_error_level"],
+        },
+        "null": {
+            "level": LOG_LEVEL,
+            "class": "logging.NullHandler",
+            "formatter": "info-formatter",
+        },
+    },
+}
+
+LOGGING = LOGGING_BASE
+
+handlers = ["console-info", "console-error"]
+if LOG_LEVEL == "DEBUG":
+    handlers.append('console-debug')
+
+loggers = {
+    "skill_matrix_api": {
+        "handlers": handlers,
+        "propagate": False,
+        "level": LOG_LEVEL,
+    },
+}
+LOGGING['loggers'] = loggers
 
 # Application definition
 

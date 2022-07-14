@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GlobalStateService } from '../../services/global-state.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +7,6 @@ import { GlobalStateService } from '../../services/global-state.service';
 })
 export class HomeComponent {
 
-  constructor(private state: GlobalStateService) { }
-
-  get loggedIn () {
-    return this.state.loginStatus;
-  }
+  constructor() { }
 
 }

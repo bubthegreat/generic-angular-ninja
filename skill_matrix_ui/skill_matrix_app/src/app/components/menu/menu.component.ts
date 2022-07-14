@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GlobalStateService } from '../../services/global-state.service';
-import { MatSnackBar } from '@angular/material';
 
 
 @Component({
@@ -13,8 +11,6 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private state: GlobalStateService,
-    private _snackBar: MatSnackBar
     ) { }
 
   ngOnInit() {
