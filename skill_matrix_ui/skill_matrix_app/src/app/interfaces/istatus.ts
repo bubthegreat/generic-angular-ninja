@@ -1,5 +1,4 @@
 export interface IStatus {
-    status: string
-    uptime: string,
-    server_time: string,
+    uptime: number,
+    mysql_connected: boolean,
 }
