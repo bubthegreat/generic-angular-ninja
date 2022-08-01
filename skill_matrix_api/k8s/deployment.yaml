@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: skill-matrix-api
-  replicas: 1
+  replicas: 4
   template:
     metadata:
       labels:
@@ -17,11 +17,35 @@ spec:
         - name: api-sqlite-volume
           persistentVolumeClaim:
             claimName: sqlite-volume-claim
-      volumeMounts:
-        - mountPath: /mnt/data
-          name: api-sqlite-volume
       containers:
         - name: skill-matrix-api
           image: skill-matrix-api-image
           ports:
-            - containerPort: 8000
+            - name: api-port
+              containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /api/status
+              port: api-port
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/status
+              port: api-port
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 1
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: "250m"
+          volumeMounts:
+            - mountPath: /mnt/data
+              name: api-sqlite-volume
+      initContainers:
+        - name: skill-matrix-api-migrater
+          image: skill-matrix-api-image
+          command: ["python", "/usr/src/skill_matrix_api/manage.py", "migrate"]

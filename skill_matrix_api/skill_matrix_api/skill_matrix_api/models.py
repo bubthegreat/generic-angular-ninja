@@ -13,7 +13,6 @@ class Employee(models.Model):
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
-    birthdate = models.DateField(null=True, blank=True)
 
 
 class KeyArea(models.Model):
@@ -26,7 +25,7 @@ class FunctionalArea(models.Model):
     """Functional area of the competency."""
 
     title = models.CharField(max_length=100)
-    key_area = models.ForeignKey(KeyArea, on_delete=models.CASCADE, default=None)
+    key_area = models.ForeignKey(KeyArea, on_delete=models.CASCADE)
 
 
 class Competency(models.Model):
@@ -34,7 +33,7 @@ class Competency(models.Model):
 
     title = models.CharField(max_length=100)
     functional_area = models.ForeignKey(
-        FunctionalArea, on_delete=models.CASCADE, default=None
+        FunctionalArea, on_delete=models.CASCADE
     )
 
 

@@ -33,6 +33,7 @@ docker_build('util-ubuntu-image', 'ubuntu/')
 
 k8s_yaml([
     'skill_matrix_api/k8s/deployment.yaml',
+    'skill_matrix_api/k8s/hpa.yaml',
     'skill_matrix_api/k8s/service.yaml',
     'skill_matrix_api/k8s/volume-claim.yaml',
     'skill_matrix_api/k8s/volume.yaml',

@@ -163,7 +163,7 @@ WSGI_APPLICATION = "skill_matrix_api.wsgi.application"
 # }
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
         "NAME": "skills_database",
         "USER": "postgres", # TODO: Pull this from configmap and os.environ
         "PASSWORD": "1f2d1e2e67df",

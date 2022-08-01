@@ -7,6 +7,7 @@ RUN apk add ca-certificates \
     musl-dev \
     libffi-dev \
     jpeg-dev zlib-dev \
+    postgresql-client \
     && pip install django-ninja
 
 
@@ -21,4 +22,4 @@ RUN mkdir -p /mnt/data
 
 EXPOSE 8000
 
-CMD python /usr/src/skill_matrix_api/manage.py makemigrations skill_matrix_api && python /usr/src/skill_matrix_api/manage.py migrate && python /usr/src/skill_matrix_api/manage.py runserver 0.0.0.0:8000
+CMD python /usr/src/skill_matrix_api/manage.py runserver 0.0.0.0:8000

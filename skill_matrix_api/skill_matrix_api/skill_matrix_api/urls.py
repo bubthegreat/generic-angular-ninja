@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import asyncio
+
 from django.contrib import admin  # type: ignore
 from django.urls import path  # type: ignore
 from ninja import NinjaAPI
@@ -32,11 +34,6 @@ from skill_matrix_api.crud.utils import add_model_crud_route
 from ninja.security import HttpBasicAuth
 from django.contrib.auth.models import User
 from ninja import Schema
-
-# TODO: Remove this default admin/admin hack.
-admins = User.objects.filter(is_staff=True)
-if not admins:
-    User(username='admin', password='admin', is_staff=True).save()
 
 import time
 UPTIME_START = time.time()
@@ -65,6 +62,18 @@ def return_status(request):
         mysql_connected = True
 
     return {'uptime': total_uptime, 'mysql_connected': mysql_connected}
+
+@api.get('/load')
+async def load_generate(request):
+    x = 2
+    count = 0
+    while count < 25:
+        x = x * x
+        count += 1
+    
+    await asyncio.sleep(0.1)
+    return x
+
 
 add_model_crud_route(api, "employees", Employee)
 add_model_crud_route(api, "departments", Department)

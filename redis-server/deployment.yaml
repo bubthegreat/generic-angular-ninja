@@ -22,12 +22,12 @@ spec:
           imagePullPolicy: IfNotPresent
           ports:
           - containerPort: 6379
+          volumeMounts:
+            - mountPath: /data
+              name: redis-pv-storage
           env:
           - name: REDIS_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: redis-secret-config
                 key: password
-      volumeMounts:
-        - mountPath: /data
-          name: redis-pv-storage

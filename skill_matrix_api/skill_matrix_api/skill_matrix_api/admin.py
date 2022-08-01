@@ -12,7 +12,7 @@ from .models import (
 
 @admin.register(Employee)
 class EmployeeAdmin(admin.ModelAdmin):
-    list_display = ("id", "first_name", "last_name", "birthdate")
+    list_display = ("id", "first_name", "last_name")
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
