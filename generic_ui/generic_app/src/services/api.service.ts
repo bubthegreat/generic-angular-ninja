@@ -3,9 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { IStatus } from '../interfaces/istatus';
 import { Observable } from 'rxjs';
 
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-
-
 const baseAPIURL = 'http://app.localhost/api/'
 const statusURL = baseAPIURL + 'status'
 

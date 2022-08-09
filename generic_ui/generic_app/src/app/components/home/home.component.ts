@@ -6,18 +6,27 @@ import { IStatus } from 'src/app/interfaces/istatus';
 const baseAPIURL = 'http://app.localhost/api/'
 const statusURL = baseAPIURL + 'status'
 const busyURL = baseAPIURL + 'load'
-const employeeURL = baseAPIURL + 'employees/?page=1'
+const stringConfigURL = baseAPIURL + 'string_configs/?page=1'
+const intConfigURL = baseAPIURL + 'int_configs/?page=1'
 
-export interface IEmployees {
-  items: IEmployee[],
+export interface IStringConfigs {
+  items: IStringConfig[],
   count: number
 }
-export interface IEmployee {
+export interface IStringConfig {
   id: number,
-  first_name: string,
-  last_name: string,
-  department: number,
-  birthdate: string
+  title: string,
+  value: string,
+}
+
+export interface IIntConfigs {
+  items: IIntConfig[],
+  count: number
+}
+export interface IIntConfig {
+  id: number,
+  title: string,
+  value: BigInteger,
 }
 
 @Component({
@@ -29,8 +38,10 @@ export class HomeComponent {
 
   status: IStatus = {'uptime': 0, 'mysql_connected': false};
   loadCount: number = 0;
-  employeeList!: IEmployees;
+  stringConfigList!: IStringConfigs;
+  intConfigList!: IIntConfigs;
   subscription: Subscription = new Subscription;
+  displayedColumns: string[] = ['title', 'value'];
 
   constructor(private http: HttpClient) { }
 
@@ -66,12 +77,23 @@ export class HomeComponent {
     this.createLoad();
   }
 
-  getEmployees() {
-    this.subscription = this.http.get<IEmployees>(employeeURL)
+  getStringConfigs() {
+    this.subscription = this.http.get<IStringConfigs>(stringConfigURL)
         .subscribe(
           resp => {
-            this.employeeList = resp; 
-            console.log('employees', resp);
+            this.stringConfigList = resp; 
+            console.log('string_configs', resp);
+            return resp;
+          }
+        )
+  }
+
+  getIntConfigs() {
+    this.subscription = this.http.get<IIntConfigs>(intConfigURL)
+        .subscribe(
+          resp => {
+            this.intConfigList = resp; 
+            console.log('int_configs', resp);
             return resp;
           }
         )
