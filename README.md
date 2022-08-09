@@ -1,6 +1,6 @@
-# Skill Matrix
+# Generic UI / API
 
-Skill matrix is a website for building out skill matrices and doing self and team assessments based on them.  Really though right now this is some bare bones implementation stuff.
+This is a generic setup for is a website for building out a website with an API deployed in kubernetes.  Really though right now this is some bare bones implementation stuff.
 
 Items in the to do list: 
 

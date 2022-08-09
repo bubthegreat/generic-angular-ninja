@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: generic-api
+spec:
+  selector:
+    matchLabels:
+      app: generic-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: generic-api
+        app: generic-api
+    spec:
+      volumes:
+        - name: api-sqlite-volume
+          persistentVolumeClaim:
+            claimName: sqlite-volume-claim
+      containers:
+        - name: generic-api
+          image: generic-api-image
+          ports:
+            - name: api-port
+              containerPort: 8000
+          livenessProbe:
+            httpGet:
+              path: /api/status
+              port: api-port
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/status
+              port: api-port
+            initialDelaySeconds: 10
+            periodSeconds: 30
+            timeoutSeconds: 1
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "80Mi"
+          volumeMounts:
+            - mountPath: /mnt/data
+              name: api-sqlite-volume
+      initContainers:
+        - name: generic-api-migrater
+          image: generic-api-image
+          command: ["python", "/usr/src/generic_api/manage.py", "migrate"]

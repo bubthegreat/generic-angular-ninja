@@ -13,20 +13,20 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: skill-matrix-ui
+            name: generic-ui
             port:
               number: 4200
       - path: /api/
         pathType: Prefix
         backend:
           service:
-            name: skill-matrix-api
+            name: generic-api
             port:
               number: 8000
       - path: /admin/
         pathType: Prefix
         backend:
           service:
-            name: skill-matrix-api
+            name: generic-api
             port:
               number: 8000

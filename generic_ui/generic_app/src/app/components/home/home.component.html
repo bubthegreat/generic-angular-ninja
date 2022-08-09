@@ -1,0 +1,16 @@
+
+
+<button mat-button (click)="getStatus()">Get Server Status</button>
+<div *ngIf="status.uptime">
+  Uptime: {{ status.uptime }}
+  Database Connectivity: {{ status.mysql_connected }}
+</div>
+
+<button mat-button (click)="getEmployees()">Get Employees</button>
+<mat-list *ngIf="employeeList?.items">
+  <mat-list-item *ngFor="let employee of employeeList.items">
+    <h3 matLine> {{employee.first_name}} {{employee.last_name}} </h3>
+  </mat-list-item>
+</mat-list>
+
+<button mat-button (click)="makeBusy()">Create Some Load</button>
