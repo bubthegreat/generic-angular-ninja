@@ -6,42 +6,6 @@
   Database Connectivity: {{ status.mysql_connected }}
 </div>
 
-<button mat-button (click)="getIntConfigs()">Get Int Configs</button>
-<table mat-table [dataSource]="intConfigList.items" class="mat-elevation-z8" *ngIf="intConfigList?.items">
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef> Title </th>
-    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="value">
-    <th mat-header-cell *matHeaderCellDef> Value </th>
-    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-<button mat-button (click)="getStringConfigs()">Get String Configs</button>
-<table mat-table [dataSource]="stringConfigList.items" class="mat-elevation-z8" *ngIf="stringConfigList?.items">
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="title">
-    <th mat-header-cell *matHeaderCellDef> Title </th>
-    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-  </ng-container>
-
-  <!-- Weight Column -->
-  <ng-container matColumnDef="value">
-    <th mat-header-cell *matHeaderCellDef> Value </th>
-    <td mat-cell *matCellDef="let element"> {{element.value}} </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
 
 <button mat-button (click)="makeBusy()">Create Some Load</button>
