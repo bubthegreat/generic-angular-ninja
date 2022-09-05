@@ -21,6 +21,7 @@ from ninja import NinjaAPI
 from .models import (
     StringConfig,
     IntConfig,
+    UserProfile,
 )
 from django.conf.urls.static import static  # type: ignore
 from django.conf import settings  # type: ignore
@@ -72,6 +73,7 @@ async def load_generate(request):
 
 add_model_crud_route(api, "string_configs", StringConfig)
 add_model_crud_route(api, "int_configs", IntConfig)
+add_model_crud_route(api, "user_profile", UserProfile)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
